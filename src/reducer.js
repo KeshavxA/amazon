@@ -4,7 +4,11 @@ export const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    // Other actions will be added later
+    case "ADD_TO_BASKET":
+      return {
+        ...state,
+        basket: [...state.basket, action.item],
+      };
     default:
       return state;
   }
