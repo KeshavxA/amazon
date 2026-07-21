@@ -1,7 +1,10 @@
 import React from 'react';
 import './Header.css';
+import { useStateValue } from '../StateProvider';
 
 function Header() {
+  const [{ basket }] = useStateValue();
+
   return (
     <div className="header">
       <div className="header__logo">
@@ -31,7 +34,7 @@ function Header() {
         </div>
         <div className="header__optionBasket">
           <span className="header__basketIcon">🛒</span>
-          <span className="header__optionLineTwo header__basketCount">0</span>
+          <span className="header__optionLineTwo header__basketCount">{basket?.length}</span>
         </div>
       </div>
     </div>
