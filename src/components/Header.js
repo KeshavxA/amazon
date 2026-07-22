@@ -4,11 +4,14 @@ import { useStateValue } from '../StateProvider';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  const [{ basket, user }] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
 
   const handleAuthenticaton = () => {
     if (user) {
-      // Firebase sign out will go here
+      dispatch({
+        type: 'SET_USER',
+        user: null
+      });
     }
   }
 
