@@ -5,7 +5,13 @@ import Subtotal from "./Subtotal";
 import { useStateValue } from "../StateProvider";
 
 function Checkout() {
-  const [{ basket }] = useStateValue();
+  const [{ basket }, dispatch] = useStateValue();
+
+  const emptyBasket = () => {
+    dispatch({
+      type: "EMPTY_BASKET"
+    });
+  };
 
   return (
     <div className="checkout">
@@ -24,7 +30,12 @@ function Checkout() {
             </div>
           ) : (
             <div>
-              <h2 className="checkout__title">Your shopping Basket</h2>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h2 className="checkout__title">Your shopping Basket</h2>
+                <button onClick={emptyBasket} style={{ background: '#f0c14b', border: '1px solid', padding: '4px 8px', cursor: 'pointer' }}>
+                  Clear Basket
+                </button>
+              </div>
               {basket.map((item, index) => (
                 <CheckoutProduct
                   key={index}
