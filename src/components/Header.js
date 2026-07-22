@@ -4,7 +4,13 @@ import { useStateValue } from '../StateProvider';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  const [{ basket }] = useStateValue();
+  const [{ basket, user }] = useStateValue();
+
+  const handleAuthenticaton = () => {
+    if (user) {
+      // Firebase sign out will go here
+    }
+  }
 
   return (
     <div className="header">
@@ -23,10 +29,12 @@ function Header() {
       </div>
 
       <div className="header__nav">
-        <div className="header__option">
-          <span className="header__optionLineOne">Hello Guest</span>
-          <span className="header__optionLineTwo">Sign In</span>
-        </div>
+        <Link to={!user && '/login'} style={{ textDecoration: 'none' }}>
+          <div onClick={handleAuthenticaton} className="header__option">
+            <span className="header__optionLineOne">Hello {!user ? 'Guest' : user.email}</span>
+            <span className="header__optionLineTwo">{user ? 'Sign Out' : 'Sign In'}</span>
+          </div>
+        </Link>
         <div className="header__option">
           <span className="header__optionLineOne">Returns</span>
           <span className="header__optionLineTwo">& Orders</span>
