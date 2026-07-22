@@ -1,10 +1,22 @@
 import React from 'react';
 import './Payment.css';
 import { useStateValue } from "../StateProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import CheckoutProduct from './CheckoutProduct';
+import { formatCurrency } from '../utils/formatCurrency';
 
 function Payment() {
-  const [{ basket, user }] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
+  const navigate = useNavigate();
+
+  const getBasketTotal = (basket) =>
+    basket?.reduce((amount, item) => item.price + amount, 0);
+
+  const handleBuyNow = () => {
+    // Navigate to orders (feature 12)
+    navigate('/orders');
+    dispatch({ type: 'EMPTY_BASKET' });
+  };
 
   return (
     <div className='payment'>
@@ -37,7 +49,29 @@ function Payment() {
             <h3>Review items and delivery</h3>
           </div>
           <div className='payment__items'>
-            {/* Items will render here in feature 11 */}
+            {basket.map((item, index) => (
+              <CheckoutProduct
+                key={index}
+                id={item.id}
+                title={item.title}
+                image={item.image}
+                price={item.price}
+                rating={item.rating}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Payment Method & Total */}
+        <div className='payment__section'>
+          <div className='payment__title'>
+            <h3>Payment Method</h3>
+          </div>
+          <div className='payment__details'>
+            <div className='payment__priceContainer'>
+              <h3>Order Total: {formatCurrency(getBasketTotal(basket))}</h3>
+              <button onClick={handleBuyNow} className="payment__buyButton">Buy Now</button>
+            </div>
           </div>
         </div>
 
