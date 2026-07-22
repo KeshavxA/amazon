@@ -21,9 +21,13 @@ function Payment() {
             <h3>Delivery Address</h3>
           </div>
           <div className='payment__address'>
-            <p>{user?.email}</p>
-            <p>123 React Lane</p>
-            <p>Los Angeles, CA</p>
+            <p>{user?.email || 'Guest'}</p>
+            <form className="payment__addressForm">
+              <input type="text" placeholder="Address Line 1" />
+              <input type="text" placeholder="Address Line 2" />
+              <input type="text" placeholder="City, State, Zip" />
+              <button onClick={e => e.preventDefault()}>Save Address</button>
+            </form>
           </div>
         </div>
 
