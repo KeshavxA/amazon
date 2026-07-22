@@ -2,6 +2,7 @@ import React from "react";
 import "./Product.css";
 import { useStateValue } from "../StateProvider";
 import { formatCurrency } from "../utils/formatCurrency";
+import { toast } from 'react-toastify';
 
 function Product({ id, title, image, price, rating }) {
   const [{ basket }, dispatch] = useStateValue();
@@ -17,6 +18,11 @@ function Product({ id, title, image, price, rating }) {
         price: price,
         rating: rating,
       },
+    });
+
+    toast.success(`Added ${title} to basket!`, {
+      position: "bottom-right",
+      autoClose: 2000,
     });
   };
 
