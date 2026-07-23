@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import { useStateValue } from '../StateProvider';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Header() {
   const [{ basket, user }, dispatch] = useStateValue();
+  const [searchInput, setSearchInput] = useState("");
 
   const handleAuthenticaton = () => {
     if (user) {
@@ -14,6 +16,13 @@ function Header() {
       });
     }
   }
+
+  const handleSearch = () => {
+    if (searchInput.trim()) {
+      toast.info(`Searching for: ${searchInput}`, { position: "bottom-right", autoClose: 2000 });
+      setSearchInput("");
+    }
+  };
 
   return (
     <div className="header">
@@ -27,8 +36,15 @@ function Header() {
       </Link>
       
       <div className="header__search">
-        <input className="header__searchInput" type="text" placeholder="Search Amazon" />
-        <div className="header__searchIcon">🔍</div>
+        <input 
+          className="header__searchInput" 
+          type="text" 
+          placeholder="Search Amazon" 
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+        />
+        <div className="header__searchIcon" onClick={handleSearch} style={{cursor: 'pointer'}}>🔍</div>
       </div>
 
       <div className="header__nav">
