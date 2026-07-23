@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Payment.css';
 import { useStateValue } from "../StateProvider";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,14 +8,20 @@ import { formatCurrency } from '../utils/formatCurrency';
 function Payment() {
   const [{ basket, user }, dispatch] = useStateValue();
   const navigate = useNavigate();
+  const [processing, setProcessing] = useState(false);
 
   const getBasketTotal = (basket) =>
     basket?.reduce((amount, item) => item.price + amount, 0);
 
   const handleBuyNow = () => {
-    // Navigate to orders (feature 12)
-    navigate('/orders');
-    dispatch({ type: 'EMPTY_BASKET' });
+    setProcessing(true);
+    
+    // Simulate a payment processing delay of 2 seconds
+    setTimeout(() => {
+      setProcessing(false);
+      navigate('/orders');
+      dispatch({ type: 'EMPTY_BASKET' });
+    }, 2000);
   };
 
   return (
@@ -70,7 +76,9 @@ function Payment() {
           <div className='payment__details'>
             <div className='payment__priceContainer'>
               <h3>Order Total: {formatCurrency(getBasketTotal(basket))}</h3>
-              <button onClick={handleBuyNow} className="payment__buyButton">Buy Now</button>
+              <button disabled={processing} onClick={handleBuyNow} className="payment__buyButton">
+                {processing ? <p>Processing...</p> : "Buy Now"}
+              </button>
             </div>
           </div>
         </div>
