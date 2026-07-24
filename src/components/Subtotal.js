@@ -14,7 +14,7 @@ function Subtotal() {
   return (
     <div className="subtotal">
       <p>
-        Subtotal ({basket.length} items):{" "}
+        Subtotal ({basket.length} {basket.length === 1 ? 'item' : 'items'}):{" "}
         <strong>{formatCurrency(getBasketTotal(basket))}</strong>
       </p>
       <small className="subtotal__gift">
