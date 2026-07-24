@@ -24,7 +24,8 @@ function Checkout() {
 
         <div>
           {basket?.length === 0 ? (
-            <div>
+            <div style={{ textAlign: 'center', padding: '20px' }}>
+              <img src="https://m.media-amazon.com/images/G/01/cart/empty/kettle-desaturated._CB424694257_.svg" alt="Empty Cart" style={{ width: '300px', marginBottom: '20px' }} />
               <h2 className="checkout__title">Your Amazon Cart is empty</h2>
               <p>You have no items in your basket. To buy one or more items, click "Add to basket" next to the item.</p>
             </div>
