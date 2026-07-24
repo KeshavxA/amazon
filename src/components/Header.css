@@ -15,6 +15,16 @@
   margin-top: 18px;
 }
 
+@media (max-width: 768px) {
+  .header__search {
+    display: none;
+  }
+
+  .header__location {
+    display: none;
+  }
+}
+
 .header__search {
   display: flex;
   flex: 1;

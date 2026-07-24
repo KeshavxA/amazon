@@ -35,6 +35,11 @@ function Header() {
         </div>
       </Link>
       
+      <div className="header__option header__location">
+        <span className="header__optionLineOne">Deliver to {user ? user.email.split('@')[0] : 'Guest'}</span>
+        <span className="header__optionLineTwo">📍 Select your address</span>
+      </div>
+
       <div className="header__search">
         <input 
           className="header__searchInput" 
