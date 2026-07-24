@@ -9,10 +9,15 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [_, dispatch] = useStateValue();
 
   const signIn = e => {
     e.preventDefault();
+    setHasSubmitted(true);
+    
+    if (!email || !password) return;
+
     auth.signInWithEmailAndPassword(email, password)
       .then(auth => {
         dispatch({
@@ -26,6 +31,10 @@ function Login() {
 
   const register = e => {
     e.preventDefault();
+    setHasSubmitted(true);
+
+    if (!email || !password) return;
+
     auth.createUserWithEmailAndPassword(email, password)
       .then((auth) => {
         dispatch({
@@ -52,7 +61,12 @@ function Login() {
 
         <form>
           <h5>E-mail</h5>
-          <input type='text' value={email} onChange={e => setEmail(e.target.value)} />
+          <input 
+            type='text' 
+            value={email} 
+            onChange={e => setEmail(e.target.value)} 
+            className={hasSubmitted && !email ? 'login__inputError' : ''}
+          />
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h5>Password</h5>
@@ -63,7 +77,12 @@ function Login() {
               {showPassword ? 'Hide' : 'Show'} password
             </span>
           </div>
-          <input type={showPassword ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} />
+          <input 
+            type={showPassword ? 'text' : 'password'} 
+            value={password} 
+            onChange={e => setPassword(e.target.value)} 
+            className={hasSubmitted && !password ? 'login__inputError' : ''}
+          />
 
           <button type='submit' onClick={signIn} className='login__signInButton'>Sign In</button>
         </form>
