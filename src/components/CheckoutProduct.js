@@ -2,6 +2,7 @@ import React from 'react';
 import './CheckoutProduct.css';
 import { formatCurrency } from '../utils/formatCurrency';
 import { useStateValue } from '../StateProvider';
+import { toast } from 'react-toastify';
 
 function CheckoutProduct({ id, image, title, price, rating }) {
   const [{ basket }, dispatch] = useStateValue();
@@ -10,6 +11,10 @@ function CheckoutProduct({ id, image, title, price, rating }) {
     dispatch({
       type: 'REMOVE_FROM_BASKET',
       id: id,
+    });
+    toast.error(`Removed ${title} from basket!`, {
+      position: "bottom-right",
+      autoClose: 2000,
     });
   };
 
