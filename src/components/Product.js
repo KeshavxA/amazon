@@ -40,6 +40,11 @@ function Product({ id, title, image, price, rating }) {
               <p key={i}>⭐</p>
             ))}
         </div>
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Amazon-Prime-Logo.svg" 
+          alt="Prime" 
+          style={{ width: '50px', marginTop: '5px' }} 
+        />
       </div>
 
       <img src={image} alt={title} />
