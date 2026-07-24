@@ -8,7 +8,8 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [{}, dispatch] = useStateValue();
+  const [showPassword, setShowPassword] = useState(false);
+  const [_, dispatch] = useStateValue();
 
   const signIn = e => {
     e.preventDefault();
@@ -53,8 +54,16 @@ function Login() {
           <h5>E-mail</h5>
           <input type='text' value={email} onChange={e => setEmail(e.target.value)} />
 
-          <h5>Password</h5>
-          <input type='password' value={password} onChange={e => setPassword(e.target.value)} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h5>Password</h5>
+            <span 
+              onClick={() => setShowPassword(!showPassword)} 
+              style={{ cursor: 'pointer', fontSize: '12px', color: '#007185' }}
+            >
+              {showPassword ? 'Hide' : 'Show'} password
+            </span>
+          </div>
+          <input type={showPassword ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} />
 
           <button type='submit' onClick={signIn} className='login__signInButton'>Sign In</button>
         </form>
