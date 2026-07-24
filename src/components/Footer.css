@@ -40,10 +40,19 @@
 .footer__linkCol > p {
   font-size: 14px;
   margin-bottom: 10px;
-  color: #ddd;
   cursor: pointer;
+  color: #DDD;
 }
 
 .footer__linkCol > p:hover {
   text-decoration: underline;
+}
+
+.footer__copyright {
+  text-align: center;
+  padding: 20px;
+  background-color: #131A22;
+  color: #DDD;
+  font-size: 13px;
+  border-top: 1px solid #3a4553;
 }

@@ -44,6 +44,9 @@ function Footer() {
           <p>Shipping Rates & Policies</p>
         </div>
       </div>
+      <div className="footer__copyright">
+        <p>&copy; {new Date().getFullYear()}, Amazon Clone by Antigravity</p>
+      </div>
     </div>
   );
 }
